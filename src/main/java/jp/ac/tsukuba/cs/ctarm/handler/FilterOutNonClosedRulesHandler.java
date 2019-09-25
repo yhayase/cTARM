@@ -33,7 +33,7 @@ public class FilterOutNonClosedRulesHandler implements
 	
 	public FilterOutNonClosedRulesHandler(Handler nextHandler, NthRuleFoundHandler nthHandler, final int eachN) throws IOException {
 		assert nextHandler != null;
-		assert eachN > 0;
+		assert eachN > 0 || nthHandler == null;
 		
 		this.nextHandler = nextHandler;
 		
@@ -57,7 +57,7 @@ public class FilterOutNonClosedRulesHandler implements
 	synchronized public void found(IntSet antecedentItemSet, IntSet consequentItemSet,
 			IntSet originTransactions, double confidence) {
 		nFoundRules += 1;
-		if (nFoundRules % eachN == 0 && nthHandler!=null) {
+		if (nthHandler!=null && nFoundRules % eachN == 0) {
 			nthHandler.nthRuleFound(nFoundRules);
 		}
 
