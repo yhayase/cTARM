@@ -71,17 +71,22 @@ public class IntRangeSet implements IntSet {
 	}
 
 	@Override
+	public void release() {
+		throw new IntRangeSetError("IntRangeSet is immutable.");
+	}
+
+	@Override
+	public int removeAll(int i) {
+		throw new IntRangeSetError("IntRangeSet is immutable.");
+	}
+
+	@Override
 	public int removeAll(IntLookupContainer c) {
 		throw new IntRangeSetError("IntRangeSet is immutable.");
 	}
 
 	@Override
 	public int removeAll(IntPredicate predicate) {
-		throw new IntRangeSetError("IntRangeSet is immutable.");
-	}
-
-	@Override
-	public int removeAllOccurrences(int e) {
 		throw new IntRangeSetError("IntRangeSet is immutable.");
 	}
 
@@ -179,5 +184,10 @@ public class IntRangeSet implements IntSet {
 		throw new IntRangeSetError("IntRangeSet is immutable");
 	}
 
-	
+	@Override
+	public String visualizeKeyDistribution(int i) {
+		throw new IntRangeSetError("IntRangeSet does not support visualizeKeyDistribution()");
+	}
+
+
 }

@@ -8,12 +8,7 @@ import java.util.Set;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-import com.carrotsearch.hppc.IntObjectMap;
-import com.carrotsearch.hppc.IntObjectOpenHashMap;
-import com.carrotsearch.hppc.IntOpenHashSet;
-import com.carrotsearch.hppc.IntSet;
-import com.carrotsearch.hppc.ObjectIntMap;
-import com.carrotsearch.hppc.ObjectIntOpenHashMap;
+import com.carrotsearch.hppc.*;
 import com.carrotsearch.hppc.cursors.IntCursor;
 
 public class AssociationRuleMiner {
@@ -40,7 +35,7 @@ public class AssociationRuleMiner {
 	final double MINIMUM_CONFIDENCE;
 	final Handler ruleFoundHandler;
 	
-	final IntObjectMap<IntSet> antecedentItemIdToTransactionIdMap = new IntObjectOpenHashMap<>();
+	final IntObjectMap<IntSet> antecedentItemIdToTransactionIdMap = new IntObjectHashMap<>();
 	final Map<IntSet, IntSet> antecedentFrequentItemSetToTransactionsMap = new HashMap<>();
 	
 	public AssociationRuleMiner(List<Transaction> transactionList,
@@ -60,7 +55,7 @@ public class AssociationRuleMiner {
 				
 				IntSet transactionSet = antecedentItemIdToTransactionIdMap.get(itemId);
 				if (transactionSet==null) {
-					transactionSet = new IntOpenHashSet();
+					transactionSet = new IntHashSet();
 					antecedentItemIdToTransactionIdMap.put(itemId, transactionSet);
 				}
 				transactionSet.add(transactionId);
@@ -176,7 +171,7 @@ public class AssociationRuleMiner {
 					return antecedentFrequentItemSetToTransactionsMap.get(itemSet).size();
 				}
 
-				private ObjectIntMap<IntSet> countingCache = new ObjectIntOpenHashMap<>();
+				private ObjectIntMap<IntSet> countingCache = new ObjectIntHashMap<>();
 				@SuppressWarnings("unused")
 				private int countTransactionsThatContainsAntecedentItemsWithOnDemandCaching(IntSet itemSet,
 						IntSet originTransactions) {
@@ -272,7 +267,7 @@ public class AssociationRuleMiner {
 				}
 			};
 			
-			initialResult.put(new IntOpenHashSet(), consequentOriginTransactions);
+			initialResult.put(new IntHashSet(), consequentOriginTransactions);
 
 			//System.out.println("==== antecedent items for " + consequentItemSet + " ====");
 			FrequentItemSetMiner.mineNextFrequentItemSet(

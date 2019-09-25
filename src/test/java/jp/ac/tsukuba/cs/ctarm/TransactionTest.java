@@ -2,7 +2,7 @@ package jp.ac.tsukuba.cs.ctarm;
 
 import jp.ac.tsukuba.cs.ctarm.engine.Transaction;
 
-import com.carrotsearch.hppc.IntOpenHashSet;
+import com.carrotsearch.hppc.IntHashSet;
 import com.carrotsearch.hppc.IntSet;
 import org.junit.jupiter.api.Test;
 
@@ -12,10 +12,10 @@ public class TransactionTest {
 
 	@Test
 	public void testTransaction() {
-		IntSet antecedentCandidateItems = new IntOpenHashSet();
+		IntSet antecedentCandidateItems = new IntHashSet();
 		antecedentCandidateItems.add(123);
 		
-		IntSet consequentCandidateItems = new IntOpenHashSet();
+		IntSet consequentCandidateItems = new IntHashSet();
 		antecedentCandidateItems.add(456);
 		
 		Transaction t = 

@@ -11,13 +11,13 @@ import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.carrotsearch.hppc.IntHashSet;
 import jp.ac.tsukuba.cs.ctarm.engine.AssociationRuleMiner;
 import jp.ac.tsukuba.cs.ctarm.handler.FilterOutNonClosedRulesHandler;
 import jp.ac.tsukuba.cs.ctarm.handler.NthRuleFoundHandler;
 import jp.ac.tsukuba.cs.ctarm.handler.PrettyPrintHandler;
 import jp.ac.tsukuba.cs.ctarm.engine.Transaction;
 
-import com.carrotsearch.hppc.IntOpenHashSet;
 import com.carrotsearch.hppc.IntSet;
 
 public class Main implements NthRuleFoundHandler {
@@ -61,8 +61,8 @@ public class Main implements NthRuleFoundHandler {
 	
 				
 				while ((line = br.readLine()) != null) {
-					IntSet ant = new IntOpenHashSet();
-					IntSet cons = new IntOpenHashSet();
+					IntSet ant = new IntHashSet();
+					IntSet cons = new IntHashSet();
 
 					String[] items = line.split("\t");
 					for (String item : items) {

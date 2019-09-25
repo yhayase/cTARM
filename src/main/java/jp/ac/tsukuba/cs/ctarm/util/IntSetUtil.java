@@ -2,7 +2,7 @@ package jp.ac.tsukuba.cs.ctarm.util;
 
 import java.util.Arrays;
 
-import com.carrotsearch.hppc.IntOpenHashSet;
+import com.carrotsearch.hppc.IntHashSet;
 import com.carrotsearch.hppc.IntSet;
 import com.carrotsearch.hppc.cursors.IntCursor;
 
@@ -38,7 +38,7 @@ public class IntSetUtil {
 	}
 
 	public static IntSet csvToIntSet(String csvInt) {
-		IntSet rval = new IntOpenHashSet();
+		IntSet rval = new IntHashSet();
 		for (String intStr : csvInt.split(",")) {
 			rval.add(Integer.parseInt(intStr));
 		}

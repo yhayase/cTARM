@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.carrotsearch.hppc.IntHashSet;
+import com.carrotsearch.hppc.IntIntHashMap;
 import jp.ac.tsukuba.cs.ctarm.util.IntRangeSet;
 
-import com.carrotsearch.hppc.IntIntOpenHashMap;
-import com.carrotsearch.hppc.IntOpenHashSet;
 import com.carrotsearch.hppc.IntSet;
 import com.carrotsearch.hppc.cursors.IntCursor;
 
@@ -27,16 +27,12 @@ public class FrequentItemSetMiner {
 			final int nRecurse,
 			final Handler handler) {
 
-		IntIntOpenHashMap itemCount = new IntIntOpenHashMap();
+		IntIntHashMap itemCount = new IntIntHashMap();
 		for (Transaction t : transactionList) {
 			IntSet itemSet = selector.select(t);
 			for (IntCursor intCursor : itemSet) {
 				int item = intCursor.value;
-				if (itemCount.containsKey(item)) {
-					itemCount.lset(itemCount.lget()+1);
-				} else {
-					itemCount.put(item, 1);
-				}
+				itemCount.putOrAdd(item, 1, 1);
 			}
 		}
 
@@ -44,7 +40,7 @@ public class FrequentItemSetMiner {
 		for (Transaction t : transactionList) {
 			IntSet itemSet = selector.select(t);
 			
-			IntOpenHashSet newItemSet = new IntOpenHashSet();
+			IntHashSet newItemSet = new IntHashSet();
 			for (IntCursor intCursor : itemSet) {
 				int item = intCursor.value;
 				if (itemCount.get(item)>=minimumFrequency) {
@@ -59,7 +55,7 @@ public class FrequentItemSetMiner {
 				new HashMap<>();
 		IntSet allTransactionIdSet = new IntRangeSet(0, transactionList.size());
 
-		emptyToAllMap.put(new IntOpenHashSet(), allTransactionIdSet);
+		emptyToAllMap.put(new IntHashSet(), allTransactionIdSet);
 		
 		mineNextFrequentItemSet2(itemSetList, minimumFrequency,
 				nRecurse, handler, emptyToAllMap);
@@ -104,14 +100,14 @@ public class FrequentItemSetMiner {
 						continue;
 					}
 
-					IntSet subItemSet = new IntOpenHashSet(previousItemSet);
+					IntSet subItemSet = new IntHashSet(previousItemSet);
 					subItemSet.add(itemId);
 					
 					final IntSet originTransactions = nextResultForPreviousItemSet.get(subItemSet);
 					if (originTransactions!=null) {
 						originTransactions.add(transactionId);
 					} else { 
-						final IntSet originTransactions2 = new IntOpenHashSet();
+						final IntSet originTransactions2 = new IntHashSet();
 						originTransactions2.add(transactionId);
 						nextResultForPreviousItemSet.put(subItemSet, originTransactions2);
 					}
@@ -162,7 +158,7 @@ public class FrequentItemSetMiner {
 			final Handler handler,
 			final Map<IntSet, IntSet> previousLevelResult) {		
 
-		final IntSet relatedTransactionIds = new IntOpenHashSet();
+		final IntSet relatedTransactionIds = new IntHashSet();
 		for (final Map.Entry<IntSet, IntSet> e : previousLevelResult.entrySet()) {
 			// final IntSet previousItemSet = e.getKey();
 			final IntSet previousOriginTransactions = e.getValue();
@@ -171,7 +167,7 @@ public class FrequentItemSetMiner {
 			}
 		}		
 		
-		IntIntOpenHashMap itemCount = new IntIntOpenHashMap();
+		IntIntHashMap itemCount = new IntIntHashMap();
 
 		for (IntCursor transactionsCursor : relatedTransactionIds) {
 			final int transactionId = transactionsCursor.value;
@@ -180,11 +176,7 @@ public class FrequentItemSetMiner {
 
 			for (IntCursor itemSetCursor : itemSet) {
 				int item = itemSetCursor.value;
-				if (itemCount.containsKey(item)) {
-					itemCount.lset(itemCount.lget()+1);
-				} else {
-					itemCount.put(item, 1);
-				}
+				itemCount.putOrAdd(item, 1, 1);
 			}
 		}
 
@@ -197,7 +189,7 @@ public class FrequentItemSetMiner {
 			final Transaction t = transactionList.get(transactionId);
 			IntSet itemSet = selector.select(t);
 			
-			IntOpenHashSet newItemSet = new IntOpenHashSet();
+			IntHashSet newItemSet = new IntHashSet();
 			for (IntCursor intCursor : itemSet) {
 				int item = intCursor.value;
 				if (itemCount.get(item)>=minimumFrequency) {
