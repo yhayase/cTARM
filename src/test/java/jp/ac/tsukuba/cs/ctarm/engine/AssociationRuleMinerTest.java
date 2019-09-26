@@ -45,7 +45,7 @@ class AssociationRuleMinerTest {
             assertTrue(answer.containsKey(keyPair));
             Pair<Integer, Double> val = answer.get(keyPair);
             assertEquals(val.a.intValue(), originTransactions.size());
-            assertEquals(val.b.doubleValue(), confidence);
+            assertEquals(val.b.doubleValue(), confidence, 0.0001);
             answer.remove(keyPair);
             System.out.println("found() called");
             assertFalse(answer.containsKey(keyPair));
