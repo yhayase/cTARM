@@ -31,7 +31,6 @@
             <groupId>com.carrotsearch</groupId>
             <artifactId>hppc</artifactId>
             <version>0.8.1</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.google.code.externalsortinginjava</groupId>
