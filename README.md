@@ -4,7 +4,7 @@ A targeted association rule mining tool for extremely infrequent rules.
 This tool can detect association rules with a very low minimum support number threshold by separating the antecedent item set and the consequent item set.
 Lower bound of the threshold is typically less than 10, however, it varies depending on the size and characteristics of the input data set.
 
-To build the tool, JDK 11 or higher and maven build tool is required.
+To build the tool, JDK 11 or higher and Apache Maven is required.
 
 Usage: java -jar cTARM-X.Y.jar MIN_SUPPORT MIN_CONFIDENCE PATH_TO_TSV_DATA REGEXP_OF_CONSEQUENT_ITEM
 
