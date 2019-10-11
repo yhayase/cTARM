@@ -6,7 +6,7 @@ Lower bound of the threshold is typically less than 10, however, it varies depen
 
 To build the tool, JDK 11 or higher and maven build tool is required.
 
-Usage: java -jar cTARM-X.Y.jar MINIMUM_SUPPORT_NUM MINIMUM_CONFIDENCE_RATIO PATH_TO_TAB_SEPARATED_DATA REGEXP_OF_CONSEQUENT_ITEM
+Usage: java -jar cTARM-X.Y.jar MIN_SUPPORT MIN_CONFIDENCE PATH_TO_TSV_DATA REGEXP_OF_CONSEQUENT_ITEM
 
 
 ```
