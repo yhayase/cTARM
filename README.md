@@ -6,8 +6,16 @@ Lower bound of the threshold is typically less than 10, however, it varies depen
 
 To build the tool, JDK 11 or higher and maven build tool is required.
 
+Usage: java -jar cTARM-X.Y.jar MINIMUM_SUPPORT_NUM MINIMUM_CONFIDENCE_RATIO PATH_TO_TAB_SEPARATED_DATA REGEXP_OF_CONSEQUENT_ITEM
+
+
 ```
-% java -classpath path/to/hppc-0.8.1.jar:path/to/externalsortinginjava-0.3.2.jar -jar cTARM-X.Y.Z.jar 1 0.1 data/small-input-example.tsv ^x
+% cd path/to/cTARM
+% mvn package
+...
+[INFO] BUILD SUCCESS
+...
+% java -jar target/cTARM-X.Y.jar 1 0.1 data/small-input-example.tsv '^x'
 15 rules are found.
 Rule: [a] => [xA, xB] w/ freq=2 conf=0.666667
 Rule: [a] => [xA] w/ freq=3 conf=1.000000
@@ -18,5 +26,5 @@ Rule: [b] => [xB, xA] w/ freq=2 conf=1.000000
 Rule: [b, c] => [xB, xA] w/ freq=1 conf=1.000000
 Rule: [c] => [xB, xA] w/ freq=1 conf=1.000000
 Rule: [d] => [xC] w/ freq=1 conf=1.000000
-56 [msec] (for 15 rules)
+50 [msec] (for 15 rules)
 ```
