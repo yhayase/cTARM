@@ -10,7 +10,9 @@ Usage: java -jar cTARM-X.Y.jar MIN_SUPPORT MIN_CONFIDENCE PATH_TO_TSV_DATA REGEX
 
 
 ```
-% cd path/to/cTARM
+% git clone https://github.com/yhayase/cTARM.git
+...
+% cd cTARM
 % mvn package
 ...
 [INFO] BUILD SUCCESS
